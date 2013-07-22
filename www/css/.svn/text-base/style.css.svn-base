@@ -1,0 +1,1766 @@
+html, body
+{
+    font-family: arial;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow: auto;
+}
+/*
+@font-face
+{
+    font-family: fontanna;
+    src: url('../font/ANNA____.ttf');
+}
+*/
+
+
+
+
+#body2
+{
+	padding-top:33PX;
+	padding-LEFT:00PX;
+	padding-bottom:00PX;
+	height: 389px;
+	width: 719px;
+	
+	background-repeat :no-repeat;
+	background-image: url('../images/iphonehor.png');
+
+}
+
+#maindiv
+{
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/big_map.png');
+}
+#maindiv1
+{
+    margin: 0;
+    padding: 0;
+     height: 552px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/big_map.png');
+}
+   
+
+#maindivAbuDhabi
+{ 
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapAbuDhabi.png');
+}
+
+#maindivDubai
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapDubai.png');
+}
+
+#maindivAjman
+{
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapAjman.png');
+}
+
+
+#maindivFujairah
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapFujairah.png');
+}
+
+
+#maindivRasAlKhaimah
+{
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapRasAlKhaimah.png');
+}
+
+
+#maindivSharjah
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapSharjah.png');
+}
+
+
+#maindivUmmAlQuwain
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/mapUmmAlQuwain.png');
+}
+
+
+#mainscreendiv
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size:100% 100%;
+    background-image:url('../images/newscreen.png');
+}
+
+
+#stickdiv
+{
+    margin: 0;
+    padding: 0;
+    height: 320px;
+    width: 480px;
+   // background-image:url('../images/newstick.png');
+    background-repeat:no-repeat;
+}
+
+
+#replaybtn
+{
+    top: 5px;
+    left: 5px;
+    position: absolute;
+    height:36px;
+    width: 86px;
+}
+#SaadiyatIsland
+{
+    top: 145px;
+    left: 190px;
+    position: absolute;
+    background-image: url('../images/SaadiyatIsland.png');
+    height: 62px;
+    width: 62px;
+}
+#SaadiyatIslandInfo
+{
+    top: 140px;
+    left: 240px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+#BurjKhalifa
+{
+    top: 05px;
+    left: 340px;
+    position: absolute;
+    background-image: url('../images/BurjKhalifa.png');
+    height: 62px;
+    width: 62px;
+}
+#BurjKhalifaInfo
+{
+    top: 02px;
+    left: 390px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+#AjmanDhow
+{
+    top: 40px;
+    left: 275px;
+    position: absolute;
+    background-image: url('../images/AjmanDhow.png');
+    height: 62px;
+    width: 62px;
+}
+#AjmanDhowInfo
+{
+    top: 35px;
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+#DubaiAirport
+{
+    top: 70px;
+    left: 345px;
+    position: absolute;
+    background-image: url('../images/DubaiAirport.png');
+    height: 62px;
+    width: 62px;
+}
+#DubaiAirportInfo
+{
+    top: 65px;
+    left: 395px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+#AlAinOasis
+{
+    top: 145px;
+    left: 380px;
+    position: absolute;
+    background-image: url('../images/AlAinOasis.png');
+    height: 62px;
+    width: 62px;
+}
+#AlAinOasisInfo
+{
+    top: 140px;
+    left: 430px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+#Fujairah
+{
+    top: 75px;
+    left: 412px;
+    position: absolute;
+    background-image: url('../images/Fujairah.png');
+    height: 62px;
+    width: 62px;
+}
+#FujairahInfo
+{
+    top: 70px;
+    left: 460px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+
+
+#Liwa
+{
+    top: 210px;
+    left: 200px;
+    position: absolute;
+    background-image: url('../images/Liwa.png');
+    height: 62px;
+    width: 62px;
+}
+#LiwaInfo
+{
+    top: 205px;
+    left: 250px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+#Sharjah
+{
+    top: 165px;
+    left: 310px;
+    position: absolute;
+    background-image: url('../images/Sharjah.png');
+    height: 62px;
+    width: 62px;
+}
+#SharjahInfo
+{
+    top: 160px;
+    left: 360px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+
+
+
+#UmmAlQuwain
+{
+    top: 105px;
+    left: 260px;
+    position: absolute;
+    background-image: url('../images/UmmAlQuwain.png');
+    height: 62px;
+    width: 62px;
+}
+#UmmAlQuwainInfo
+{
+    top: 100px;
+    left: 310px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+                                                                        
+#RasAlKhaimah
+{
+    top: 07px;
+    left: 410px;
+    position: absolute;
+    background-image: url('../images/RasAlKhaimah.png');
+    height: 62px;
+    width: 62px;
+}
+#RasAlKhaimahInfo
+{
+    top: 03px;
+    left: 455px;
+    position: absolute;
+    background-image: url('../images/info.png');
+    height: 20px;
+    width: 19px;
+}
+
+  
+
+
+
+
+
+#divcorrect
+{
+    top: 50px;
+    left: 170px;
+    position: absolute;
+    background-image: url('../images/correct.png');
+    height:53px;
+    width: 64px;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: fade;
+	-webkit-animation-duration: 1s;
+    
+    
+    
+}
+
+@-webkit-keyframes fade {
+	0% {
+		opacity: 0.0;
+	}
+	100% {
+		opacity: 1.0;
+	}
+}
+
+#divincorrect
+{
+    top: 50px;
+    left: 165px;
+    position: absolute;
+    background-image: url('../images/incorrect.png');
+    height: 53px;
+    width: 64px;
+    -webkit-animation-name: fade;
+	-webkit-animation-duration: 2s;
+    
+}
+
+
+/*** horizontal list applied to thumbnails, nav controls ***/
+ul
+{
+    float: left;
+    width: 100%;
+    margin: 0px 0px 20px 0px;
+    padding: 0;
+    list-style-type: none;
+}
+li
+{
+    /*display: inline;*/
+    margin-right: 5px;
+}
+
+/*** pop-up div to cover entire area ***/
+.divModalDialog
+{
+    background-image:url('../images/Horizontal_pop.png');
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /*! important !*/
+    display: none; /* last attribute set darkness on scale: 0...1.0 */
+    text-align: center;
+    z-index: 101;
+}
+
+/*** ! target attribute does the job ! ***/
+.divModalDialog:target
+{
+    display: block;
+}
+
+/*** virtual frame containing controls, image and caption ***/
+.divModalDialog
+{
+    /* either absolute or fixed */
+    background-image:url('../images/Horizontal_pop.png');
+    position: fixed;
+    top:14%;
+    left: 7%;
+    width: 419px;
+    height: 279px;
+    /*border: solid 1px gray;  rounded corners
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; */
+    z-index: 102;
+    
+}
+
+/*** header used as main image caption  ***/
+.divModalDialog div h1
+{
+    width: 100%;
+    font-size: 2em;
+    color: #dadada;
+    z-index: 103; /* add shadows to text */
+    -moz-text-shadow: 10px 3px 4px 6px rgba(0,0,0,0.9);
+    -webkit-text-shadow: 3px 4px 6px rgba(0,0,0,0.9);
+    text-shadow: 10px 4px 6px rgba(0,0,0,0.9);
+}
+
+/*** main image style ***/
+.divModalDialog img
+{
+    padding-top: 5px;
+    padding-left: 0px;
+    z-index: 105; 
+    /* border: solid 1px gray;             rounded corners          	-moz-border-radius: 10px;             -webkit-border-radius: 10px;             border-radius: 10px;*/
+}
+
+/*** navigation controls style: highest z-index ! ***/
+.divModalDialog ul a
+{
+    padding: 5px;
+    font-size: 3em;
+    font-weight: bold;
+    color: Yellow;
+    text-decoration: none;
+    border: solid 0px Gray; /* rounded corners */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    z-index: 110;
+}
+
+/*** div serves as thumbnais container  ***/
+#divThumbnails
+{
+    position: relative;
+    margin: 75px 0 0 0;
+    height: 250px;
+    padding-top: 30px;
+    background-color: #cacaca; /* add shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(50,50,50,0.7);
+    -webkit-box-shadow: 5px 5px 10px rgba(50,50,50,0.7);
+    box-shadow: 5px 5px 10px rgba(50,50,50,0.7); /* gradient effect with color-stop */
+    background: -moz-linear-gradient(top, #f0f0f0,  #bababa 10%, #cacaca 49%, #909090 50%, #cacaca 50%, #cacaca 90%, #ababab);
+    background: -webkit-gradient(linear, center top, center bottom, from(#f0f0f0), color-stop(0.1, #bababa ), color-stop(0.49, #cacaca),  color-stop(0.50, #909090), color-stop(0.50, #cacaca), color-stop(0.90, #cacaca), to(#ababab));
+}
+
+/*** thumbnails image style ***/
+#divThumbnails img
+{
+    padding: 10px;
+    height: 200px;
+    max-width: 300px;
+    border: solid 1px gray; /* rounded corners */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* add shadows */
+    -moz-box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* page footer/header: fixed */
+#footer, #header
+{
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #606060;
+    color: #cacaca; /* add shadows to text */
+    -moz-text-shadow: 10px 3px 4px 6px rgba(10,10,10,0.6);
+    -webkit-text-shadow: 3px 4px 6px rgba(10,10,10,0.6);
+    text-shadow: 3px 4px 6px rgba(10,10,10,0.6);
+}
+#header
+{
+    top: 0;
+    height: 70px;
+    width: 100%;
+    background: #404040;
+}
+#footer
+{
+    width: 75%;
+    bottom: 0;
+    height: 50px;
+    padding-top: 15px;
+    text-align: left;
+    text-indent: 20%; /* top rounded corners */
+    -webkit-border-top-right-radius: 40px;
+    -moz-border-radius-topright: 40px;
+    border-top-right-radius: 40px;
+    background: -moz-linear-gradient(top, #ababab,#505050 70%,#303030 70%,#202020);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ababab), color-stop(0.75, #505050), color-stop(0.75, #303030), to(#202020));
+}
+
+.lblstyle
+{
+    font-family:arial;
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:right;
+    text-decoration : none;
+    width:320px;
+    height :64px;
+    
+}
+.tblstyle
+{
+    width:320px;
+    vertical-align:middle;
+    
+}
+.tblstyleplate1
+{
+    position:absolute;
+    top:335px;
+    width:281px;
+    left:370px;
+    /*vertical-align:middle;*/
+    //background-image:url('../images/plate01.png');
+    background-repeat:no-repeat;
+    height :53px;
+}
+.tblstyleplate2
+{
+    position:absolute;
+    top:380px;
+    width:300px;
+    left:370px;
+    /*vertical-align:middle;*/
+    //background-image:url('../images/plate02.png');
+    background-repeat:no-repeat;
+    height :53px;
+}
+.tblstyleplate3
+{
+    
+    position:absolute;
+    top:420px;
+    width:281px;
+    left:380px;
+    /*vertical-align:middle;*/
+   // background-image:url('../images/plate03.png');
+    background-repeat:no-repeat;
+    height :53px;
+}
+.maindiv
+{
+    width:480px;   
+    vertical-align:middle;    
+}
+.gameboardcellstyle
+{
+    height:25px;
+    width:45px;
+    vertical-align:middle;
+    horizontal-align:center;
+    align:center;
+}
+
+.lblTimerText 
+{
+    font-family:arial;
+    font-size:12px;
+    text-align:right;
+    color:#fff;
+}
+
+.innercontentdiv
+{   
+    color:#402609;
+    text-align:justify;
+    font-size:14px;
+    font-family:arial;
+    height:180px;
+    overflow:auto;
+    vertical-align:top;
+}
+
+.divheader
+{   
+    color:#402609;
+    text-align:left;
+    font-size:16px;
+    font-weight:bold;
+    font-family:arial;
+}
+
+#scenariodiv
+{
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size: 1024px 600px;
+    background-image:url('../images/bg.png');
+    text-align:right;
+}
+
+
+#scorebg1
+{
+     position:absolute;
+     top:00px;
+    margin: 0;
+    padding: 0;
+    height: 320px;
+    width: 480px;
+   // background-image:url('../images/scorebg.png');
+    text-align:right;
+}
+
+
+#exitrasure
+{
+	position: absolute;
+	 top: 450px;
+	left: 490px;
+    background-image: url('../images/gameexit.png');
+	width: 100px;
+	height: 35px;
+	background-size: 100px 35px;
+	z-index:100;
+}
+
+
+
+
+
+#scenariodivgame
+{
+    position:absolute;
+    top:00px;
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 1024px;
+    background-size:1024px 600px;
+    background-image:url('../images/newbg.png');
+    text-align:right;
+}
+
+
+
+
+#pagediv
+{
+    margin: 0;
+    padding: 0;
+     height: 600px;
+    width: 1024px;
+    background-size: 1024px 600px;
+    font-size:15px;
+    text-align:justify;
+    font-family:arial;
+    color:#402609;
+    background-image:url('../images/newpage.png');
+}
+
+.question
+{
+    margin: 0;
+    padding: 0;
+    font-size:20px;
+    text-align:center;
+    font-family:arial;
+    color:#402609;
+}
+
+.instructions
+{
+    margin: 0;
+    padding: 0;
+    font-size:13px;
+    text-align:justify;
+    font-family:arial;
+    color:#402609;
+    
+}
+
+
+
+
+#divanswer
+{
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/won.png');
+    height: 500px;
+    width: 999px;    
+    background-size: 999px 500px;  
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: fade;
+	-webkit-animation-duration: 1s;
+    font-family:arial;
+    color: #614523;
+    text-align:center;
+    padding-top:50px;
+    background-repeat:no-repeat;
+}
+
+#divwronganswer
+{
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/lost.png');
+     height: 500px;
+    width: 999px;    
+    background-size: 999px 500px; 
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: fade;
+	-webkit-animation-duration: 1s;
+    font-family:arial;
+    color: #614523;
+    text-align:center;
+    padding-top:50px;
+    background-repeat:no-repeat;
+}
+
+
+
+#questiondiv1
+
+{
+position: absolute;
+	top: 95px;
+	left: 65px;
+	z-index:999;
+	font-family:arial;
+	font-weight:bold;
+}
+
+
+#gamescore
+
+{
+position: absolute;
+	top: 95px;
+	left: 300px;
+	z-index:999;
+	font-family:arial;
+	font-weight:bold;
+}
+
+#top
+
+{
+position: absolute;
+	top: 45px;
+	left: 175px;
+	z-index:999;
+	font-family:arail;
+	font-weight:bold;
+	color:red;
+	font-size:25px;
+}
+
+
+
+@-webkit-keyframes bouncefront {
+        0% { -webkit-transform: translate3d(0,   0px,0); 
+             -webkit-animation-timing-function: ease-out; }
+       50% { -webkit-transform: translate3d(0,-90px,0); 
+             -webkit-animation-timing-function: ease-in; }
+      100% { -webkit-transform: translate3d(0,   0px,0); }
+}
+    
+
+@-webkit-keyframes bouncebback {
+        0% { -webkit-transform: translate3d(0,   0px,0); 
+             -webkit-animation-timing-function: ease-out; }
+       50% { -webkit-transform: translate3d(0,90px,0); 
+             -webkit-animation-timing-function: ease-in; }
+      100% { -webkit-transform: translate3d(0,   0px,0); }
+}
+    
+    
+
+@-webkit-keyframes movetoleft {
+        0% { -webkit-transform: translate3d(420, 0px,0); 
+             -webkit-animation-timing-function: ease-out; }     
+      100% { -webkit-transform: translate3d(-410px, 0px,0);
+             }
+}
+
+@-webkit-keyframes movetoleftout {
+        0% { -webkit-transform: translate3d(420, 0px,0); 
+             -webkit-animation-timing-function: ease-out; }     
+      100% { -webkit-transform: translate3d(-250px, 0px,0);
+             }
+}
+    
+    
+@-webkit-keyframes movetoright {
+        0% { -webkit-transform: translate3d(10, 0px,0); 
+             -webkit-animation-timing-function: ease-out; }     
+      100% { -webkit-transform: translate3d(420px, 0px,0);}
+}
+@-webkit-keyframes movetorightout {
+        0% { -webkit-transform: translate3d(10, 0px,0); 
+             -webkit-animation-timing-function: ease-out; }     
+      100% { -webkit-transform: translate3d(20px, 0px,0);}
+}
+
+#door1
+{
+     position: absolute;
+     left: 170px;
+     top: 13px;
+     height: 243px;
+     width: 165px;
+     background-size:100% 100%;
+      background-image:url('../images/downstone.png');  
+    -webkit-animation: bouncefront 2s infinite ;
+}
+
+#door2
+{
+     position: absolute;
+      left: 170px;
+      top:260px;
+      height: 243px;
+     width:165px;
+     background-size:100% 100%;
+      background-image:url('../images/upstone.png'); 
+    -webkit-animation: bouncebback 2s infinite ;    
+}
+
+#trasurebox
+{
+     position: absolute;
+      left: 10px;
+      top: 220px;
+      background-image:url('../images/treasure.png'); 
+      height:110px;                               
+      width:120px;
+      background-size:120px 110px;
+}
+
+.player
+{
+     position: absolute;
+      left: 420px;
+      top: 140px;
+      height:109px !important;                               
+      width:83px !important;
+      background-size:83px 109px;
+      
+}
+
+.playerrun
+{
+      position: absolute;
+      left: 420px;
+      top: 220px;
+       height:100px !important;                               
+       width:96px !important;
+       background-size:100% 100%;
+      background-repeat:no-repeat;
+      background-image:url('../images/running.gif');
+     -webkit-animation: movetoleft 2s;
+     -webkit-animation-iteration-count: 1;
+}
+
+.playerrunout
+{
+      position: absolute;
+      left: 420px;
+      top: 220px;
+       height:100px !important;                               
+        width:96px !important;
+        background-size:100% 100%;
+      background-repeat:no-repeat;
+      background-image:url('../images/running.gif');
+     -webkit-animation: movetoleftout 1s;
+     -webkit-animation-iteration-count: 1;
+}
+
+.playerrunback
+{
+        position: absolute;
+        left: 420px;
+        top: 220px;
+         height:100px !important;                               
+        width:96px !important;
+        background-size:100% 100%;
+        background-image:url('../images/newrunn.gif');
+         background-repeat:no-repeat;
+        -webkit-animation: movetoright 2s;
+        -webkit-animation-iteration-count: 1;
+}
+
+.playerrunbackout
+{
+        position: absolute;
+        left: 420px;
+        top: 220px;
+        height:100px !important;                               
+        width:96px !important;
+        background-size:100% 100%;
+        background-image:url('../images/newrunn.gif');
+         background-repeat:no-repeat;
+        -webkit-animation: movetorightout 0.5s;
+        -webkit-animation-iteration-count: 1;
+}
+
+
+#btngettreasure
+{
+        position: absolute;
+        left: 937px;
+        top: 220px;
+        height:111px !important;                               
+        width:63px !important;
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+        background-image:url('../images/standing.png');
+}
+
+.playerwondering
+{
+        position: absolute;
+        left: 150px;
+        top: 220px;
+         height:100px !important;                               
+        width:96px !important;
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+        background-image:url('../images/standing.png');
+}
+
+#btnreturnback
+{
+        position: absolute;
+        left: 30px;
+        top: 220px;
+        height:111px !important;                               
+        width:63px !important;
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+        background-image:url('../images/holding.png');
+}
+
+#PegAbuDhabi
+{
+        position: absolute;
+        left: 645px;
+        top: 325px;
+        height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;
+}
+
+#FerrariWorld
+{
+        position: absolute;
+        left: 720px;
+        top: 620px;
+        height:62px;
+        width:51px;
+        background-repeat:no-repeat;
+}
+
+#AlAinPalace
+{
+        position: absolute;
+        left: 1075px;
+        top: 500px;
+        height:62px;
+        width:51px;
+        background-repeat:no-repeat;
+}
+
+
+#PegDubai
+{
+        position: absolute;
+        left: 490px;
+        top: 355px;
+        height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;
+}
+        
+        
+#PegSharjah
+{
+        position: absolute;
+        left: 530px;
+        top: 310px;
+        height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;
+}
+        
+   
+#PegAjman
+{
+        position: absolute;
+        left: 538px;
+        top: 270px;
+        height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;        
+ }
+        
+
+        
+#PegUmmAlQuwaina
+{
+      position:absolute;
+        left: 560px;
+        top: 360px;
+       height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;
+      
+        }
+    
+#PegFujairah
+{
+        position: absolute;
+        left: 525px;
+        top: 280px;
+       height: 45px;  
+        width: 44px;
+        background-repeat:no-repeat;
+        
+ }
+        
+#PegRasAlKhaimah
+{
+    position: absolute;
+    left: 550px;
+    top: 295px;
+    height: 45px;  
+    width: 44px;
+    background-repeat:no-repeat;
+}   
+        
+
+.gameinstructions
+{    
+    position: fixed;
+    text-align:justify;
+    font-family:arial;
+    font-size:16px;
+    color:#402609;
+    overflow:auto;    
+    height:185px;
+    width:450px;
+}
+
+.headingclass
+{
+text-align: center; 
+font-size: 12px;
+ font-family: arial; 
+color: #402609;
+overflow:auto; 
+padding-top:15px;
+}
+
+.gameheading
+{    
+     
+    text-align:center;
+    font-family:arial;
+    font-size:20px;
+    color:#402609;
+    overflow:auto;
+}
+
+#yourscore
+{
+    position:absolute;
+    top:265px;
+    left: 0px;
+    width:480px;
+    text-align: center;
+    font-size:16px;
+    font-family:arial;
+    color:#68410b;
+    
+}
+
+
+#yourscoremap
+{
+    position: absolute;
+top: 06px;
+left: 0px;
+text-align: center;
+width: 800px;
+font-size: 19px;
+font-family: 'arial';
+color: #68410b;
+    
+    
+}
+
+.yellowtext
+{
+    color:#F5E2B2;
+    font-family:arial;
+    font-size:25px;
+}
+
+#scorecard
+{
+    float:left;
+    top:400px;
+    position:fixed;
+    left:35px
+    
+}
+
+#exitgame
+{
+    float:left;
+    top:410px;
+    position:fixed;
+    left:860px;
+    
+}
+
+#imgbegin
+{     
+    float:left;
+    top: 520px;
+    position: fixed;
+    left: 790px;
+}
+
+#imgbegin1
+{     
+    float:left;
+    top:265px;
+    position:fixed;
+    left:380px
+}
+
+#imgAnswer
+{     
+    float:left;
+    top:255px;
+    position:fixed;
+    left:300px
+}
+
+
+#imgContinue
+{     
+    float:left;
+    top:255px;
+    position:fixed;
+    left:300px
+}
+
+#exitbutt
+{     
+    float:left;
+    top:260px;
+    position:fixed;
+    left:65px;
+}
+
+#option1
+{
+    position:absolute;
+    top:160px;
+    width:62px;
+    vertical-align:middle;   
+    height :62px;
+    left: 120px;
+}
+#option2
+{
+    position:absolute;
+    top:160px;
+    width:62px;
+    vertical-align:middle;   
+    height :62px;
+    left: 210px;
+}
+#option3
+{
+    position:absolute;
+    top:160px;
+    width:62px;
+    vertical-align:middle;
+    height :62px;
+    right: 120px;
+}
+
+#mapexit
+{     
+    float:left;
+    top: 560px;
+    position:fixed;
+    left:917px
+}
+
+#abudhabi1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi1.png');
+   height: 62px;
+    width: 62px;
+}
+
+#abudhabi2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi3
+{
+   
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi3.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi4
+{
+   
+    left:10px;
+    position: absolute;
+    background-image: url('../images/abudhabi4.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi5
+{
+   
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi5.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi6
+{
+    top: 240px;
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi6.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi7
+{
+   
+    left: 10px;
+    position: absolute;
+   background-image: url('../images/abudhabi7.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi8
+{
+    left: 10px;
+    position: absolute;
+   background-image: url('../images/abudhabi8.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi9
+{
+    left: 10px;
+    position: absolute;
+    //background-image: url('../images/abudhabi9.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi10
+{
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/abudhabi10.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi11
+{
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/abudhabi11.png');
+    height: 62px;
+    width: 62px;
+}
+
+
+#abudhabi12
+{
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/abudhabi12.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi13
+{
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/abudhabi6.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi14
+{
+    
+    left: 180px;
+    position: absolute;
+    background-image: url('../images/abudhabi14.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi15
+{
+    
+    left: 100px;
+    position: absolute;
+    background-image: url('../images/abudhabi15.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi16
+{
+    
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/abudhabi16.png');
+    height: 62px;
+    width: 62px;
+}
+
+#abudhabi17
+{
+    
+    left: 320px;
+    position: absolute;
+    background-image: url('../images/abudhabi17.png');
+    height: 62px;
+    width: 62px;
+}
+
+
+#ajman1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ajman1.png');
+     height: 62px;
+    width: 62px;
+}
+
+#ajman2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ajman2.png');
+     height: 62px;
+    width: 62px;
+}
+
+#ajman3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ajman3.png');
+     height: 62px;
+    width: 62px;
+}
+
+#ajman4
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ajman4.png');
+     height: 62px;
+    width: 62px;
+}
+
+
+#dubai1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/dubai1.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/dubai2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/dubai3.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai4
+{
+    
+    left: 185px;
+    position: absolute;
+    background-image: url('../images/dubai4.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai5
+{
+    
+    left: 250px;
+    position: absolute;
+    background-image: url('../images/dubai5.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai6
+{
+    
+    left: 70px;
+    position: absolute;
+   // background-image: url('../images/dubai6.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai7
+{
+    
+    left: 275px;
+    position: absolute;
+    background-image: url('../images/dubai7.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai8
+{
+    
+    left: 150px;
+    position: absolute;
+    background-image: url('../images/dubai8.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai9
+{
+    
+    left: 250px;
+    position: absolute;
+    background-image: url('../images/dubai9.png');
+    height: 62px;
+    width: 62px;
+}
+
+#dubai10
+{
+    
+    left: 200px;
+    position: absolute;
+    background-image: url('../images/dubai10.png');
+    height: 62px;
+    width: 62px;
+}
+
+
+#fujairaj1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/fujairaj1.png');
+    height: 62px;
+    width: 62px;
+}
+
+#fujairaj2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/fujairaj2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#fujairaj3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/fujairaj3.png');
+    height: 62px;
+    width: 62px;
+}
+
+#fujairaj4
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/fujairaj4.png');
+    height: 62px;
+    width: 62px;
+}
+
+
+
+#rasalkhaimah1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/rasalkhaimah1.png');
+     height: 62px;
+    width: 62px;
+}
+
+#rasalkhaimah2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/rasalkhaimah2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#rasalkhaimah3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/rasalkhaimah3.png');
+     height: 62px;
+    width: 62px;
+}
+
+
+#sharjah1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/sharjah1.png');
+    height: 62px;
+    width: 62px;
+}
+
+#sharjah2
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/sharjah2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#sharjah3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/sharjah3.png');
+    height: 62px;
+    width: 62px;
+}
+
+#sharjah4
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/sharjah4.png');
+    height: 62px;
+    width: 62px;
+}
+
+
+
+
+
+#ummalquwain1
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ummalquwain1.png');
+    height: 62px;
+    width: 62px;
+}
+
+#ummalquwain2
+{
+   
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ummalquwain2.png');
+    height: 62px;
+    width: 62px;
+}
+
+#ummalquwain3
+{
+    
+    left: 10px;
+    position: absolute;
+    background-image: url('../images/ummalquwain3.png');
+    height: 62px;
+    width: 62px;
+}
+
+#ummalquwain4
+{
+    
+    left: 160px;
+    position: absolute;
+    background-image: url('../images/ummalquwain4.png');
+    height: 62px;
+    width: 62px;
+}
+
+#divcorrectmsg
+{
+
+top:110px;
+position: absolute;
+left:125px;
+width:150px;
+font-family:'arial';
+color:#68410b;	
+
+}
+
+#divincorrectmsg
+{
+top:110px;
+position: absolute;
+left:140px;
+font-family:'arial';
+color:#68410b;
+
+}
+
+.submitscore
+{
+    position: absolute;
+    top: 450px;
+    left: 350px;
+    background-image: url('../images/submitscore.png');
+    width: 125px;
+    height: 35px;
+    background-size: 125px 35px;
+    z-index: 100;
+}
+
+
+
+
+

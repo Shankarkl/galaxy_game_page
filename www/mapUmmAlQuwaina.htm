@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UAE Memory Game</title>
+    <link rel="Stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/create_tables.jsf"></script>
+    <script type="text/javascript" src="js/database.jsf"></script>
+    <script language="javascript" type="text/javascript">
+        var sid, displayedquestion = '', questionid = 0, answerdestinationid = 0, currentquestionnumber = 1;
+        var starttime, totalScore, clockTimer, isHidden = 0, currentctrl;
+        var QuestionBySenarioId, RestStopDtls, ScenarioById, QuestionById, ScenarioRestStop;
+        function InitObjects() {
+
+            QuestionBySenarioId = function (transaction, result) {
+                if (result != null && result.rows != null && result.rows.length > 0) {
+
+                    for (var i = 0; i < result.rows.length; i++) {
+                    
+                        var row = result.rows.item(i);
+                        var destctrl = row["DestinationID"];
+                       
+                           if(i==0){
+                            document.getElementById(destctrl).style.top = '90px';
+                        }else if(i==1){
+                            document.getElementById(destctrl).style.top = '165px';
+                        }else if(i==2){
+                            document.getElementById(destctrl).style.top = '240px';
+                        }
+                        document.getElementById(destctrl).style.display = 'block';
+                    }
+                }
+            }
+
+
+            RestStopDtls = function (transaction, result) {
+
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    var pegfound = 0;
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        var ctrl = 'Peg' + row["RestStopName"];
+                        document.getElementById(ctrl).style.display = 'block';
+                        if (currentquestionnumber == row["RestStopOrder"]) {
+                            pegfound = 1;
+                            currentctrl = 'Peg' + row["RestStopName"];
+                            document.getElementById(ctrl).setAttribute('src', 'images/blink.gif');
+                            ScrollTo(document.getElementById(ctrl))
+                        }
+                    }
+                    
+                }
+            }
+
+
+
+
+            RestStopDetails = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                var divTitle = document.getElementById('divTitle');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["DestinationDesc"];
+                        divTitle.innerHTML = row["DestinationName"];
+                    }
+                    return false;
+                }
+            }
+
+            ScenarioById = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                var divTitle = document.getElementById('divTitle');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["ScenarioDesc"];
+                        divTitle.innerHTML = row["ScenarioName"];
+                    }
+                    return false;
+                }
+            }
+
+
+            QuestionById = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["Question"];
+                        answerdestinationid = row["AnswerDestinationID"];
+                        document.getElementById('divTitle').innerHTML = 'Question ' + answerdestinationid;
+                    }
+                    return false;
+                }
+            }
+        }
+
+
+        function ObjectPosition(obj) {
+            var curleft = 0;
+            var curtop = 0;
+            if (obj.offsetParent) {
+                do {
+                    curleft += obj.offsetLeft; curtop += obj.offsetTop;
+                } while (obj = obj.offsetParent);
+            }
+            return [curleft, curtop];
+        }
+
+        function ScrollTo(obj) {
+            try {
+                var objpos = ObjectPosition(obj);
+            } catch (e) { }
+            try {
+                scroll(objpos[0], objpos[1]);
+            } catch (e) { } try {
+                window.scrollTo(objpos[0], objpos[1]);
+            } catch (e) { }
+        }
+
+
+
+
+        function InfoClick(div) {
+            var destID = div.id;
+            destinationID = destID.toString().replace('Info', '');
+
+            document.getElementById('divTitle').innerHTML = destinationID;
+            GetRestStopDtlById(destinationID, RestStopDetails);
+        }
+
+        function DestinationClick(div) {
+            var destinationID = div.id;
+            document.getElementById('divTitle').innerHTML = destinationID;
+            GetRestStopDtlById(destinationID, RestStopDetails);
+            document.getElementById('dialog').style.display = 'block';
+           // Ti.App.fireEvent('openDialog', { currentquestionnumber: currentquestionnumber }); 
+            
+        }
+
+        function PegClick(pegid) {
+         
+            //if (document.getElementById(pegid).src.indexOf('blink') > 0) {
+                //display question
+                //window.location.href = "ScenarioDetails.htm?sid=" + sid + "&page=question&reststop=" + currentquestionnumber;
+                Ti.App.fireEvent('displayQuestion', { sid: sid, currentquestionnumber: currentquestionnumber }); 
+           /* } else {
+                destinationID = pegid.toString().replace('Peg', '');
+                document.getElementById('divTitle').innerHTML = destinationID;
+                GetRestStopDtlById(destinationID, RestStopDetails);
+                Ti.App.fireEvent('openDialog', { currentquestionnumber: currentquestionnumber }); 
+            }*/
+
+             
+        }
+        
+        function CloseClick()
+        {
+            document.getElementById('dialog').style.display = 'none';
+            //Ti.App.fireEvent('closeDialog', { currentquestionnumber: currentquestionnumber }); 
+        }
+
+        function scrollback() {
+            ScrollTo(document.getElementById(currentctrl));
+        }
+
+        function InitGameBoard() {
+            //read query string
+            var query = window.location.search.substring(1);
+            var parms = query.split('&');
+
+            var pos = parms[0].indexOf('=');
+            if (pos > 0) {
+                sid = parms[0].substring(pos + 1);
+
+                if (parms[1] != null) {
+                    pos = parms[1].indexOf('=');
+                    answerdestinationid = parms[1].substring(pos + 1);
+                }
+                if (parms[2] != null) {
+                    pos = parms[2].indexOf('=');
+                    currentquestionnumber = parms[2].substring(pos + 1);
+                }
+                if (parms[3] != null) {
+                    pos = parms[3].indexOf('=');
+                    isHidden = parms[3].substring(pos + 1);
+                }
+            }
+            InitObjects();
+            //GetQuestionBySenarioId(sid, QuestionBySenarioId);
+            
+            GetMapRestStop(sid, currentquestionnumber, QuestionBySenarioId);
+            
+            //GetRestStopDtls(sid, currentquestionnumber, RestStopDtls);
+              if(currentquestionnumber == 6){
+                document.getElementById('PegSharjah').src = 'images/smalltreasure.png';
+            }
+            document.getElementById('yourscoremap').innerHTML = 'Rest Stop <b>' + currentquestionnumber + '</b>, [<b>Umm Al Quwain</b>] Score: <b>' + ((currentquestionnumber - 1) * 10) + '</b>';
+        }
+        function outfromgame(){
+         Ti.App.fireEvent('exitfrommap');
+        }        
+    </script>
+</head>
+<body style="width: 1024px; background-repeat:no-repeat;" onload="InitGameBoard();" background="images/bg.png">
+    <div id="maindivUmmAlQuwain">
+        <div id="mapdiv">
+            <img src="images/replay.png" style="display:none" alt="" onclick="replayscenario();" id="replaybtn" />
+            <a  style="display: none" id="dubai1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="dubai2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="dubai3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ajman1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ajman2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ajman3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="abudhabi1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="abudhabi2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="abudhabi3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="sharjah1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="sharjah2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="sharjah3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ummalquwain1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ummalquwain2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ummalquwain3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="ummalquwain4" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="rasalkhaimah1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="rasalkhaimah2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="rasalkhaimah3" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="fujairaj1" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="fujairaj2" onclick="DestinationClick(this)">
+            </a><a style="display: none" id="fujairaj3" onclick="DestinationClick(this)">
+
+            </a>            
+            <!--<img id="PegAbuDhabi" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>
+            <img id="PegDubai" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>
+            <img id="PegAjman" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>
+            <img id="PegSharjah" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>-->
+           
+            <img id="PegUmmAlQuwaina" alt="" src="images/peg.png"  onclick="PegClick(this.id)" /></a>            <!--</a>
+            <img id="PegRasAlKhaimah" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>
+            <img id="PegFujairaj" alt="" src="images/peg.png" style="display: none" onclick="PegClick(this.id)" /></a>-->
+            
+            
+            <a  style="display:none" style="display:scroll;position:fixed;top:100px;left:5px;" title="Back to RestStop"><img style="display:none" src="images/answer.png" onclick="scrollback();"/></a>
+             <img src="images/newexit.png" id="mapexit" onclick="outfromgame();" />
+        </div>
+    </div>
+    <div id="dialog" class="divModalDialog">
+        <div>
+            <!--CLOSE BTN-->
+            <table width="419px" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="20px">
+                    </td>
+                    <td width="280px" class="divheader">
+                    </td>
+                    <td width="20px">
+                        <a>
+                            <img src="images/close.png" alt="X"  onclick="CloseClick();" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td width="280px" id="divTitle" class="divheader">
+                        Title
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="15px">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <!--Content Div
+                        <span style="color: White">-->
+                        <div id="divcontent" class="innercontentdiv">
+                        </div>
+                        <!--</span>-->
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <a>
+        <input type="submit" style="display: none" id="btnwin" value="Win" /></a>
+    <div id="dialoguserinfo" class="divModalDialog">
+        <div>
+            <!--CLOSE BTN-->
+            <table width="320px" cellpadding="0" cellspacing="0" border="0" style="background-color: Gray">
+                <tr>
+                    <td width="20px">
+                    </td>
+                    <td width="280px" id="divTitle1" class="divheader">
+                    </td>
+                    <td width="20px">
+                        <a>
+                            <img src="images/close.png" alt="X" /></a>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div id="dialoguserinfocontent">
+                <label for="name" class="innercontentdiv">
+                    Enter you Name</label>
+                <input type="text" name="txtusername" id="txtusername" /><br />
+                <br />
+                <a>
+                    <input type="submit" id="btnSave" name="btnSave" onclick="saveTopScore" value="OK" /></a>
+                <a>
+                    <input type="submit" id="btnCancel" name="btnCancel" value="Cancel" /></a>
+            </div>
+        </div>
+    </div>
+    <div id="yourscoremap">
+    </div>
+    <div id="divcorrect" style="display: none">
+    </div>
+    <div id="divincorrect" style="display: none">
+    </div>
+</body>
+</html>

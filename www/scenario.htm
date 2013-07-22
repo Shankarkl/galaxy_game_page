@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UAE Memory Game</title>
+    <link rel="Stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/create_tables.jsf"></script>
+    <script type="text/javascript" src="js/database.jsf"></script>
+    <script type="text/javascript" language="javascript">
+        var ResultData, ScenarioById;
+
+
+        function InitilizeObjects() {
+            ResultData = function (transaction, result) {
+                var data = [];
+                var lsttable = document.getElementById('lsttable');
+
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+
+                        var row = result.rows.item(i);
+
+                        var rowCount = lsttable.rows.length;
+
+                        var tblrow = lsttable.insertRow(rowCount);
+                        var cellitem = tblrow.insertCell(0);
+                        if (i == 0) {
+                            cellitem.setAttribute("class", "tblstyleplate1");
+                        } else if (i == 1) {
+                            cellitem.setAttribute("class", "tblstyleplate2");
+                        } else if (i == 2) {
+                            cellitem.setAttribute("class", "tblstyleplate3");
+                        }
+                        var lblitem = document.createElement("a");
+                        lblitem.innerHTML = row["ScenarioName"];
+                        lblitem.setAttribute("class", "lblstyle");
+                        lblitem.setAttribute('id', 'scenariodiv_' + row["ScenarioID"]);
+                        //lblitem.setAttribute('href', 'ScenarioDetails.htm?sid=' + row["ScenarioID"]);
+                        lblitem.addEventListener("click", function () { OnLabelClick(this) }, false);
+                        cellitem.appendChild(lblitem);
+                    }
+                }
+            }
+
+            ScenarioById = function (transaction, result) {
+                var divctrl = document.getElementById('divmaincontent');
+                var divTitle = document.getElementById('divTitle');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["ScenarioDesc"];
+                        divTitle.innerHTML = row["ScenarioName"];
+                    }
+                }
+            }
+
+        }
+
+        function InitData() {
+            try {
+                InitilizeObjects();
+                CheckTable();
+                GetScenarios(ResultData);
+                DeleteUserQuestion('test');
+               
+            }
+            catch (err) {
+                //alert(err);
+            }
+        }
+
+        function OnLabelClick(lblitem) {
+            var divid = lblitem.id;
+            var sid = divid.split('_')[1];
+           
+            Ti.App.fireEvent('label', { sid: sid });
+        }
+
+        function gotoscorecard() {
+
+            Ti.App.fireEvent('openscorecard');
+            //window.location.href = "scores.htm";
+        }
+
+        function exitgame() {
+            Ti.App.fireEvent('exit');
+        }
+    </script>
+</head>
+<body onload="InitData();" background="images/bg.png" style="width: 1024px; background-repeat:no-repeat;">
+    <div id="mainscreendiv">
+        <div id="stickdiv">
+            <div style="height: 20px">
+            </div>
+            <table id="lsttable" class="tblstyle" cellspacing="20px" align="center" border="0">
+            </table>
+            <div id="scorecard" align="left">
+                <img src="images/scorecard.png" alt=" Score Card " onclick="gotoscorecard();"  style="height:200px; width:139px;"/>
+            </div>
+            <div id="exitgame" align="left">
+                <img src="images/exit.png" alt=" Score Card " onclick="exitgame();" style="height:190px; width:139px;" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

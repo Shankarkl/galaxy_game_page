@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>UAE Memory Game</title>
+		<link rel="Stylesheet" href="css/style.css" type="text/css" />
+		<script type="text/javascript" src="js/create_tables.jsf"></script>
+		<script type="text/javascript" src="js/database.jsf"></script>
+		<script type="text/javascript" language="javascript">
+			function InitGame() {
+				// Ti.App.fireEvent('changehorizontal');
+				var t = setTimeout("Hidesplash()", 2500);
+			}
+
+			function Hidesplash() {
+				document.getElementById('splashscreen').style.display = 'none';
+				Ti.App.fireEvent('exitspalsh');
+			}
+		</script>
+	</head>
+	<body onload="InitGame();" background='views/iphone_game_pages/images/travelsplash.png'>
+		<img src="views/iphone_game_pages/images/travelsplash.png" id="splashscreen"> </img>
+	</body>
+</html>

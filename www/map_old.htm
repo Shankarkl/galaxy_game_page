@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UAE Memory Game</title>
+    <link rel="Stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/create_tables.jsf"></script>
+    <script type="text/javascript" src="js/database.jsf"></script>
+    <script language="javascript" type="text/javascript">
+
+        var sid, displayedquestion = '', questionid = 0, answerdestinationid = 0, currentquestionnumber = 1;
+        var starttime, totalScore, clockTimer, isHidden = 0;
+        var QuestionBySenarioId, RestStopDetails, ScenarioById, QuestionById;
+
+        function InitObjects() {
+            QuestionBySenarioId = function (transaction, result) {
+                alert('asdasd')
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        var ctrl = row["DestinationID"];
+
+                        document.getElementById(ctrl).style.display = 'block';
+                        document.getElementById(ctrl + 'Info').style.display = 'block';
+                    }
+                }
+            }
+
+            RestStopDetails = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                var divTitle = document.getElementById('divTitle');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["DestinationDesc"];
+                        divTitle.innerHTML = row["DestinationName"];
+                    }
+                    return false;
+                }
+            }
+
+            ScenarioById = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                var divTitle = document.getElementById('divTitle');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["ScenarioDesc"];
+                        divTitle.innerHTML = row["ScenarioName"];
+                    }
+                    return false;
+                }
+            }
+
+
+            QuestionById = function (transaction, result) {
+                var divctrl = document.getElementById('divcontent');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+                    for (var i = 0; i < result.rows.length; i++) {
+                        var row = result.rows.item(i);
+                        divctrl.innerHTML = row["Question"];
+                        answerdestinationid = row["AnswerDestinationID"];
+                        document.getElementById('divTitle').innerHTML = 'Question ' + answerdestinationid;
+                    }
+                    return false;
+                }
+            }
+        }
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+        function replayscenario() {
+
+            //var loc = "ScenarioDetails.htm?sid=" + sid + "&page=scenario&answerdestination=" + answerdestinationid;
+            Ti.App.fireEvent('replayscenario', { sid: sid, answerdestinationid: answerdestinationid });
+
+        }
+
+        function DateTime() {
+            var mins, sec;
+            mins = parseInt(starttime / 60);
+            sec = starttime % 60;
+
+            var displaytime = padobj(mins) + ':' + padobj(sec);
+
+            try {
+
+                document.getElementById("lblTimer").innerHTML = displaytime;
+                starttime++;
+            }
+            catch (ex) {
+            }
+            clockTimer = setTimeout("DateTime()", 1000);
+        }
+
+        function padobj(obj) {
+            if (obj < 10)
+                return '0' + obj;
+            else
+                return obj
+        }
+
+
+        function InfoClick(div) {
+            var destID = div.id;
+            destinationID = destID.toString().replace('Info', '');
+            document.getElementById('divTitle').innerHTML = destinationID;
+            GetRestStopDtlById(destinationID, RestStopDetails);
+        }
+
+        function DestinationClick(div) {
+            if (answerdestinationid == div.id) {
+                document.getElementById('yourscoremap').style.display = 'none';
+                document.getElementById('mapdiv').style.display = 'none';
+                document.getElementById('divcorrect').style.display = 'block';
+                var t = setTimeout("wait('Y')", 2000);
+            }
+            else {
+                document.getElementById('yourscoremap').style.display = 'none';
+                document.getElementById('mapdiv').style.display = 'none';
+                document.getElementById('divincorrect').style.display = 'block';
+                var t = setTimeout("wait('N')", 2000);
+            }
+        }
+
+        function wait(response) {
+            if (response == 'Y' && isHidden == 0) {
+                Ti.App.fireEvent('nextquestion',{sid:sid,currentquestionnumber:currentquestionnumber});   
+                //window.location.href = "ScenarioDetails.htm?sid=" + sid + "&page=question&currentQuestion=" + currentquestionnumber;
+
+            } else if (response == 'Y' && isHidden == 1) {
+                Ti.App.fireEvent('wait');
+                //window.location.href = "unlocktreasure.htm";
+
+            } else if (response == 'N' && isHidden == 1) {
+                SaveUserScore('test', 50);
+                Ti.App.fireEvent('scenario');
+                //window.location.href = "scenario.htm";
+
+            } else if (response == 'N') {
+                Ti.App.fireEvent('scenario');
+                //window.location.href = "scenario.htm";
+            }
+        }
+
+        function InitGameBoard() {
+            // Titanium.UI.orientation = Titanium.UI.LANDSCAPE_LEFT;
+            //read query string
+            var query = window.location.search.substring(1);
+            var parms = query.split('&');
+
+            var pos = parms[0].indexOf('=');
+            if (pos > 0) {
+                sid = parms[0].substring(pos + 1);
+
+                if (parms[1] != null) {
+                    pos = parms[1].indexOf('=');
+                    answerdestinationid = parms[1].substring(pos + 1);
+                }
+                if (parms[2] != null) {
+                    pos = parms[2].indexOf('=');
+                    currentquestionnumber = parms[2].substring(pos + 1);
+                }
+                if (parms[3] != null) {
+                    pos = parms[3].indexOf('=');
+                    isHidden = parms[3].substring(pos + 1);
+                }
+            }
+            SaveUserQuestion(sid, answerdestinationid);
+            InitObjects();
+            GetQuestionBySenarioId(1, QuestionBySenarioId);
+
+
+            document.getElementById('yourscoremap').innerHTML = 'Your Score : <b>' + ((currentquestionnumber - 1) * 10) + '</b>';
+        }
+    </script>
+</head>
+<body style="width: 1024px;" onload="InitGameBoard();">
+    <div id="maindiv1">
+        <div id="mapdiv">
+            <img src="images/replay.png" alt="" onclick="replayscenario();" id="replaybtn" />
+            <div style="display: none" id="AjmanDhow" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="AjmanDhowInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="BurjKhalifa" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="BurjKhalifaInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="AlAinOasis" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="AlAinOasisInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="SaadiyatIsland" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="SaadiyatIslandInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="DubaiAirport" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="DubaiAirportInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="Fujairah" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="FujairahInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="Liwa" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="LiwaInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="RasAlKhaimah" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="RasAlKhaimahInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="Sharjah" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="SharjahInfo" onclick="InfoClick(this)">
+            </a>
+            <div style="display: none" id="UmmAlQuwain" onclick="DestinationClick(this)">
+            </div>
+            <a href="#dialog" style="display: none" id="UmmAlQuwainInfo" onclick="InfoClick(this)">
+            </a>
+        </div>
+    </div>
+    <div id="dialog" class="divModalDialog">
+        <div>
+            <!--CLOSE BTN-->
+            <table width="419px" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="20px">
+                    </td>
+                    <td width="280px" class="divheader">
+                    </td>
+                    <td width="20px">
+                        <a href="#">
+                            <img src="images/close.png" alt="X" /></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td width="280px" id="divTitle" class="divheader">
+                        Title
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="15px">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <!--Content Div
+                        <span style="color: White">-->
+                        <div id="divcontent" class="innercontentdiv">
+                        </div>
+                        <!--</span>-->
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <a href="#dialoguserinfo">
+        <input type="submit" style="display: none" id="btnwin" value="Win" /></a>
+    <div id="dialoguserinfo" class="divModalDialog">
+        <div>
+            <!--CLOSE BTN-->
+            <table width="320px" cellpadding="0" cellspacing="0" border="0" style="background-color: Gray">
+                <tr>
+                    <td width="20px">
+                    </td>
+                    <td width="280px" id="divTitle1" class="divheader">
+                    </td>
+                    <td width="20px">
+                        <a href="#">
+                            <img src="images/close.png" alt="X" /></a>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div id="dialoguserinfocontent">
+                <label for="name" class="innercontentdiv">
+                    Enter you Name</label>
+                <input type="text" name="txtusername" id="txtusername" /><br />
+                <br />
+                <a href="#">
+                    <input type="submit" id="btnSave" name="btnSave" onclick="saveTopScore" value="OK" /></a>
+                <a href="#">
+                    <input type="submit" id="btnCancel" name="btnCancel" value="Cancel" /></a>
+            </div>
+        </div>
+    </div>
+    <div id="yourscoremap">
+    </div>
+    <div id="divcorrect" style="display: none">
+    </div>
+    <div id="divincorrect" style="display: none">
+    </div>
+    <div>
+    <img id="AbuDhabi" alt="" src="images/peg.png" />
+    <img id="Dubi" alt="" src="images/peg.png" />
+    <img id="sharjaha" alt="" src="images/peg.png" />
+    <img id="Ajman" alt="" src="images/peg.png" />
+    <img id="Ummalquwaina" alt="" src="images/peg.png" />
+    <img id="FUjAiraha" alt="" src="images/peg.png" />
+    <img id="RasAlKhaimaha" alt="" src="images/peg.png" />
+    </div>
+</body>
+</html>

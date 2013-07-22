@@ -1,0 +1,173 @@
+// JScript source code
+addJavascript('js/create_tables.jsf', 'head');
+
+var db;
+var shortName = 'UAETravelGame';
+var version = '1.0';
+var displayName = 'UAETravelGame';
+var maxSize = 65535;
+
+//null db data handler
+nullDataHandler = function (transaction, results) {
+}
+
+function onError(tx, error) {
+    //  alert('error in db : ' + error.message + ' code: ' + error.code);
+}
+
+function GetScenarios(resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = 'SELECT ScenarioID, ScenarioName, ScenarioDesc FROM Scenarios';
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetScenarioById(sid, resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = 'SELECT ScenarioID, ScenarioName, ScenarioDesc FROM Scenarios WHERE ScenarioID = ' + sid;
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+
+function GetQuestionBySenarioId(sid, resultdata) {
+      
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        //sid = 1;
+        var query = 'SELECT QuestionID, ScenarioID,DestinationID,Question,AnswerDestinationID,Status FROM Questions WHERE ScenarioID = ' + sid + ' AND Status = 1';
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetRestStopDtlById(DestinationID, resultdata) {
+    	var db = openDatabase(shortName, version, displayName, maxSize);
+    	db.transaction(function (tx) {
+        var query = "SELECT ScenarioID,DestinationName,DestinationID,DestinationDesc,DestinationURL, RestStopID FROM ScenarioDestinations WHERE DestinationID = '" + DestinationID + "' LIMIT 1";
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetMapRestStop(sid, currentquestion, resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = "SELECT ScenarioID,DestinationName,DestinationID,DestinationDesc,DestinationURL, RestStopID FROM ScenarioDestinations WHERE ScenarioID = " + sid + " AND RestStopID = " + currentquestion;
+
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+
+function GetRestStopDtls(sid, currentquestion,resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+	
+        var query = "SELECT ScenarioID ,RestStopName, RestStopDesc, RestStopOrder FROM RestStop WHERE ScenarioID = " + sid + " ORDER BY RestStopOrder";
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetScenarioRestStop(sid, currentquestion,resultdata) {
+	var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = "SELECT ScenarioID ,RestStopName, RestStopDesc, RestStopOrder FROM RestStop WHERE ScenarioID = " + sid  ;
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetQuestionById(qid, resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = "SELECT QuestionID, ScenarioID,Question,DestinationID,AnswerDestinationID,Status, RestStopID, imageURL FROM Questions WHERE DestinationID = '" + qid + "'";
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetAllQuestionById(sid ,resultdata) {
+  
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = 'SELECT QuestionID, ScenarioID,Question,DestinationID,AnswerDestinationID,Status, RestStopID, imageURL FROM Questions WHERE ScenarioID = ' + sid + ' AND   QuestionID NOT IN (SELECT QuestionID FROM UserQuestions)'; //alert(query);
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function GetRestStopQuestion(sid, reststopid,resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = 'SELECT QuestionID, ScenarioID,Question,DestinationID,AnswerDestinationID,Status, RestStopID, imageURL FROM Questions WHERE RestStopID = '+ reststopid + ' AND ScenarioID = ' + sid;
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+function SaveUserScore(username, score) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var endTime = new Date().getTime();
+        query = "UPDATE UserInfo SET Score = '" + score + "', EndTime = '" + score + "' WHERE UserName = '" + username + "' AND EndTime = ''";
+        tx.executeSql(query);
+
+        query = "UPDATE UserInfo SET TimeTaken = EndTime - StartTime WHERE UserName = '" + username + "'";
+        tx.executeSql(query);
+    });
+}
+
+function SaveUserQuestion(sid, destinationID) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+
+        query = "INSERT INTO UserQuestions (ScenarioID, DestinationID, QuestionID) "
+        query = query + " SELECT ScenarioID,  DestinationID, QuestionID FROM Questions WHERE ScenarioID = " + sid + " AND DestinationID =  '" + destinationID + "' LIMIT 1";
+
+        tx.executeSql(query);
+    });
+}
+
+function GetUserScore(resultdata) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        var query = "SELECT UserName, Score FROM UserInfo   WHERE EndTime <> '' ORDER BY Score Desc, TimeTaken Desc LIMIT 5";
+        tx.executeSql(query, [], resultdata)
+    });
+}
+
+
+function DeleteUserQuestion(username) {
+    var db = openDatabase(shortName, version, displayName, maxSize);
+    db.transaction(function (tx) {
+        query = "DELETE FROM UserQuestions";
+        tx.executeSql(query);
+
+
+        //query = "DROP TABLE UserInfo";
+        //tx.executeSql(query);
+
+        query = "DELETE FROM UserInfo WHERE EndTime = ''";
+        tx.executeSql(query);
+
+        var startTime = new Date().getTime();
+        query = "INSERT INTO UserInfo(UserName, Score, TimeTaken, StartTime, EndTime) VALUES('" + username + "',0,'','" + startTime + "','')";
+        tx.executeSql(query);
+    });
+}
+function CheckTable() {
+
+    //('inside check table');
+    CreateTables();
+}
+
+
+
+function saveTravelGameScore(resdata){
+	
+}
+
+function addJavascript(jsname, pos) {
+    var th = document.getElementsByTagName(pos)[0];
+    var s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', jsname);
+    th.appendChild(s);
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UAE Memory Game</title>
+    <link rel="Stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/create_tables.jsf"></script>
+    <script type="text/javascript" src="js/database.jsf"></script>
+    <script type="text/javascript" src="../gamedatabase.js"></script> 
+    <script type="text/javascript" language="javascript">
+
+        var ResultData, ResultDatafromService;
+        function InitilizeObjects() {
+
+
+            ResultData = function (transaction, result) {
+                var data = [];
+                var lsttable = document.getElementById('lsttable');
+                if (result != null && result.rows != null && result.rows.length > 0) {
+
+                    for (var i = 0; i < result.rows.length; i++) {
+
+                        var row = result.rows.item(i);
+
+                        var rowCount = lsttable.rows.length;
+
+                        var tblrow = lsttable.insertRow(rowCount);
+                        var cellitemuser = tblrow.insertCell(0);
+
+                        var lbluser = document.createElement("label");
+                        lbluser.innerHTML = row["UserName"];
+                        lbluser.setAttribute("class", "lblstyle");
+                        cellitemuser.appendChild(lbluser);
+
+                        var cellitemscore = tblrow.insertCell(1);
+
+                        var lblscore = document.createElement("label");
+                        lblscore.innerHTML = row["Score"];
+                        lblscore.setAttribute("class", "lblstyle");
+                        cellitemscore.appendChild(lblscore);
+                    }
+                }
+                else {
+                    document.getElementById('divnodata').style.display = 'block';
+                }
+            }
+        }
+        var GetScoreData = function(results){
+         //alert('lll');
+        // alert('ee' + results.retdata)
+        }
+  
+  
+  
+        Ti.App.addEventListener('travelgamedata', GetScoreData);
+   
+
+        function InitData() {     
+            
+            var query = window.location.search.substring(1);
+            var parms = query.split('&');
+            
+            var pos = parms[0].indexOf('=');
+            if (pos > 0) {
+           /*     data = parms[0].substring(pos + 1);
+               // alert('qs:' + data);*/
+            }
+            
+            //Ti.App.fireEvent('GetTravelGameData');//,{GetScoreData:GetScoreData}
+        }
+        
+       
+
+        function scorecard() {
+            Ti.App.fireEvent('main');
+        }  
+    
+        </script>
+</head>
+<body onload="InitData();" background="images/bg.png">
+    <div id="mainscreendiv">
+        <div style="height: 20px; z-index: 999; font-family: Comic Sans MS;">
+        </div>
+        <div style="height: 20px" class="yellowtext">
+        </div>
+        <div id="top">
+            Top 5 Scores
+        </div>
+        <div id="questiondiv1">
+            aamer
+        </div>
+        <div id="gamescore">
+            50
+        </div>
+        <table id="lsttable" class="tblstyle" cellspacing="20px" align="center" border="0">
+        </table>
+        <div>
+            <img id="scorebg1" alt="" src="images/scorebg.png" />
+        </div>
+        <div>
+            <img id="exitbutt" onclick="Javascript:scorecard();" src="images/newexit.png" width="98px"
+                height="38px" />
+        </div>
+        <div style="height: 20px">
+        </div>
+        <div id="divnodata" style="height: 40px; display: none;" class="yellowtext">
+            No Data !!
+        </div>
+    </div>
+</body>
+</html>

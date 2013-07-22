@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>UAE Memory Game</title>
+    <link rel="Stylesheet" href="css/style.css" type="text/css" />
+    <script type="text/javascript" src="js/create_tables.jsf"></script>
+    <script type="text/javascript" src="js/database.jsf"></script>
+    <script type="text/javascript" language="javascript">
+        var clockTimer, gamestarttime, clicktime, passed = 1;
+        function Timer() {
+
+
+            var displaytime = padobj(starttime);
+
+            try {
+                if (starttime == -1) {
+                    hideallctrls();
+                    document.getElementById('divwronganswer').style.display = 'block'
+                    document.getElementById('exitrasure').style.display = 'block'
+                    document.getElementById('submitscore1').style.display = 'block'
+                } else if (starttime >= 0) {
+                    document.getElementById("lblTimer").innerHTML = displaytime;
+                    starttime--;
+                    clockTimer = setTimeout("Timer()", 1000);
+                }
+            }
+            catch (ex) {
+            }
+        }
+
+        function padobj(obj) {
+            if (obj < 10)
+                return '0' + obj;
+            else
+                return obj;
+        }
+
+
+        function InitData() {
+            gamestarttime = new Date().getTime();
+        }
+
+        function playerrun() {
+            starttime = 12;
+            Timer();
+            clicktime = new Date().getTime();
+
+            var oscillations = parseInt((clicktime - gamestarttime) / 1000);
+            var pos = parseInt((clicktime - gamestarttime) % 1000);
+            //document.getElementById('test').innerHTML = oscillations + " " + pos;
+            if ((oscillations % 2 == 0 && (pos >= 500 && pos <= 1000)) || (oscillations % 2 == 1 && (pos >= 0 && pos <= 500))) {
+                passed = 1;
+                document.getElementById('btngettreasure').style.display = 'none';
+                document.getElementById('player').setAttribute('class', 'playerrun');
+                setTimeout("fixpos()", 2000);
+            } else {
+                passed = 0;
+                document.getElementById('btngettreasure').style.display = 'none';
+                document.getElementById('player').setAttribute('class', 'playerrunout');
+                setTimeout("fixpos()", 1000);
+            }
+        }
+
+        function returnback() {
+            clicktime = new Date().getTime();
+
+            var oscillations = parseInt((clicktime - gamestarttime) / 1000);
+            var pos = parseInt((clicktime - gamestarttime) % 1000);
+            // document.getElementById('test').innerHTML = oscillations + " " + pos;
+            /* if ((oscillations % 2 == 0 && (pos >= 600 && pos <= 1000)) || (oscillations % 2 == 1 && (pos >= 0 && pos <= 400))) {
+            passed = 1;
+            } else {
+            passed = 0;
+            }*/
+            document.getElementById('player').setAttribute('class', 'playerrunback');
+            document.getElementById('player').style.display = "block";
+            document.getElementById('btnreturnback').style.display = 'none';
+            setTimeout("fixposback()", 2000);
+        }
+
+        function fixpos() {
+            if (passed == 0) {
+                hideallctrls();
+                document.getElementById('playerwondering').style.display = 'block';
+                document.getElementById('player').style.left = "150px";
+                document.getElementById('divwronganswer').style.display = 'block';
+                document.getElementById('btnreturnback').style.display = 'none';
+                // alert("you are out");
+            } else {
+                document.getElementById('btnreturnback').style.display = 'block';
+                document.getElementById('player').style.left = "00px";
+                document.getElementById('trasurebox').style.display = "none";
+                //document.getElementById('player').style.backgroundColor = "white";
+                document.getElementById('player').style.display = "none";
+                //document.getElementById('divanswer').style.display = 'block';
+                   
+            }
+        }
+
+        function fixposback() {
+            if (passed == 0) {
+           
+                //SaveUserScore('test', 70);
+                hideallctrls();
+                document.getElementById('divwronganswer').style.display = 'block';
+                //Ti.App.fireEvent('savescore',{response:'Y', score:'70',username:Ti.App.Properties.getString('EmailID','')});
+                
+            } else {
+                //SaveUserScore('test', 90); 
+                document.getElementById('btnreturnback').style.display = 'none';
+                document.getElementById('btngettreasure').style.display = 'none';
+                document.getElementById('player').style.display = 'none';
+                document.getElementById('trasurebox').style.display = 'none';
+                document.getElementById('door1').style.display = 'none';
+                document.getElementById('door2').style.display = 'none';
+                document.getElementById('lblTimer').style.display = 'none';
+                document.getElementById('divanswer').style.display = 'block'; 
+                document.getElementById('submitscore2').style.display = 'block'
+                document.getElementById('exitrasure').style.display = 'block'
+                document.getElementById('player').style.left = "420px";
+                document.getElementById('trasurebox').style.display = "none";
+                document.getElementById('player').style.display = "none";
+                clearTimeout(clockTimer);
+                               
+                starttime = -2;
+            }
+        }
+
+        function hideallctrls() {
+            document.getElementById('btnreturnback').style.display = 'block';
+            document.getElementById('btngettreasure').style.display = 'none';
+            document.getElementById('player').style.display = 'none';
+            document.getElementById('trasurebox').style.display = 'none';
+            document.getElementById('door1').style.display = 'none';
+            document.getElementById('door2').style.display = 'none';
+            document.getElementById('lblTimer').style.display = 'none';
+            starttime = -1;
+        }
+
+
+        function HidePopup() {
+            document.getElementById('divanswer').style.display = 'none'
+        }
+
+       
+        function scorepage() {
+
+            Ti.App.fireEvent('exitrasure');
+        } 
+    
+        function submitscore(seltype) {
+        var emailid = '';
+        
+        
+        //alert('submit:::' + emailid);
+            if(seltype == '1'){
+                Ti.App.fireEvent('savetravelscore',{response:'Y', score:'70',username:emailid}); 
+            }else{
+                Ti.App.fireEvent('savetravelscore',{response:'Y', score:'90',username:emailid});
+            }
+        }
+
+
+    </script>
+</head>
+<body onload="InitData();" background="images/bg.png" style="width: 1024px;height: 600px; background-repeat:no-repeat;">
+    <label id="test">
+    </label>
+    <div id="scenariodivgame">
+        <label id="lblTimer" class="lblstyle">
+            12</label>  Sec Remaining
+        <div id="btnreturnback" onclick="returnback();" style="display: none" ></div>
+    </div>
+    <div id="exitrasure" onclick="scorepage();"style="display: none">
+    </div> 
+    <div id="submitscore1" class="submitscore" onclick="submitscore('1');"style="display: none">
+    </div> 
+    <div id="submitscore2" class="submitscore" onclick="submitscore('2');"style="display: none">
+    </div> 
+    <div id="door1">
+    </div>
+    <div id="door2">
+    </div>
+    <div id="player" class="player">
+    </div>
+    <div id="divanswer" style="display: none">
+    </div>
+    <div id="divwronganswer" style="display: none">
+    </div>
+    <div id="trasurebox">
+    </div>    
+    <div id="btngettreasure" onclick="playerrun();" ></div>
+    <div id="playerwondering"  style="display: none" class="playerwondering" ></div>
+</body>
+</html>
